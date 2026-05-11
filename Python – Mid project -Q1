@@ -1,0 +1,46 @@
+import random
+
+word = "TREASURE"
+
+file = open("game.txt", "w")
+
+for i in range(10):
+    num = random.randint(1, 20)
+    file.write(str(i) * num)
+
+file.write(word)
+
+for i in range(9, -1, -1):
+    num = random.randint(1, 20)
+    file.write(str(i) * num)
+
+file.close()
+
+file = open("game.txt", "r")
+text = file.read()
+
+place = 0
+count = 0
+
+while text[place] not in word:
+
+    move = input("1-forward 2-backward: ")
+    steps = int(input("steps: "))
+
+    if move == "1":
+        place = place + steps
+    else:
+        place = place - steps
+
+    if place < 0:
+        place = 0
+
+    if place >= len(text):
+        place = len(text) - 1
+
+    print(text[place])
+
+    count = count + 1
+
+print("moves:", count)
+print("found:", text[place])
